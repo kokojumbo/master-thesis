@@ -8,8 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="nz.ac.waikato.cms.weka:weka-stable:3.6.10" level="project" />
-    <orderEntry type="library" name="com.google.guava:guava:16.0.1" level="project" />
-    <orderEntry type="library" name="commons-cli:commons-cli:20040117.000000" level="project" />
   </component>
 </module>
 
