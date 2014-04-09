@@ -1,11 +1,13 @@
 package com.master.thesis;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import weka.clusterers.ClusterEvaluation;
 import weka.clusterers.DBSCAN;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Normalize;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -94,32 +96,53 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
         evaluation.evaluateClusterer(minorityInstancesNoClass);
         System.out.println(evaluation.clusterResultsToString());
 
+        double[] minorityClusterAssignments = evaluation.getClusterAssignments();
+        Map<Integer, Integer> minorityHistogram = new TreeMap<Integer, Integer>();
+        for (double val : minorityClusterAssignments) {
+            minorityHistogram.put((int) val, minorityHistogram.containsKey((int) val) ? minorityHistogram.get((int) val) + 1 : 1);
+        }
 
-        Map<Integer, Integer> histogram = new TreeMap<Integer, Integer>();
+        Map<Integer, Integer> majorityHistogram = new TreeMap<Integer, Integer>();
         for (int i = 0; i < majorityInstances.numInstances(); i++) {
             Instance currInst = majorityInstances.instance(i);
             try {
                 int cluster = dbScan.clusterInstance(currInst);
 
-                histogram.put(cluster, histogram.containsKey(cluster) ? histogram.get(cluster) + 1 : 0);
+                majorityHistogram.put(cluster, majorityHistogram.containsKey(cluster) ? majorityHistogram.get(cluster) + 1 : 1);
                 //System.out.println(dbScan.clusterInstance(currInst));
 
             } catch (Exception e) {
 
                 //System.out.println("NOISE -> Cannot be clustered");
-                histogram.put(-1, histogram.containsKey(-1) ? histogram.get(-1) + 1 : 0);
+                majorityHistogram.put(-1, majorityHistogram.containsKey(-1) ? majorityHistogram.get(-1) + 1 : 1);
 
             }
 
         }
         System.out.println();
+        System.out.println("Majority's objects");
 
-        for (Map.Entry<Integer, Integer> entry : histogram.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : majorityHistogram.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+        System.out.println();
+        System.out.println("Balance in clusters");
+        double averageBalance = 0;
+        for (Map.Entry<Integer, Integer> entry : majorityHistogram.entrySet()) {
+            int cluster = entry.getKey();
+            int majorityCount = entry.getValue();
+            int minorityCount = minorityHistogram.get(entry.getKey());
+            double balance = 100.0*minorityCount/(minorityCount+majorityCount);
+            averageBalance += balance;
+            System.out.print(cluster + ": " + majorityCount + ", " + minorityCount + " ");
+            System.out.println(String.format("\t\t%.2f %%", balance));
 
-
+        }
+        averageBalance /= majorityHistogram.size();
+        System.out.println(String.format("Average balance: %.2f %%", averageBalance));
     }
+
+
 
     @Override
     public Instances loadDataFile(String filename) {
@@ -133,6 +156,11 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
             source = new DataSource(path);
             data = source.getDataSet();
             System.out.println(filename + " -> Data loaded.");
+            // Normalizacja atrybutów, domyslne ustawienia
+            Normalize filterNorm = new Normalize();
+            filterNorm.setInputFormat(data) ;
+            data = Filter.useFilter(data, filterNorm);
+            System.out.println("Data Normalized");
             System.out.println();
             return data;
         } catch (Exception e) {
@@ -142,6 +170,9 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
         return null;
 
     }
+
+
+
 
     @Override
     public double getMinorityValue(Instances instances) throws Exception {
