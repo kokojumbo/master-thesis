@@ -16,7 +16,7 @@ public interface ImbalancedAlgorithm {
 
     public Instances loadDataFile(String filename);
 
-    public  double getMinorityValue(Instances instances) throws Exception;
+    public double getMinorityValue(Instances instances) throws Exception;
 
 
 }

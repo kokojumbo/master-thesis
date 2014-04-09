@@ -1,15 +1,5 @@
 package com.master.thesis;
 
-import weka.clusterers.ClusterEvaluation;
-import weka.clusterers.DBSCAN;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.converters.ConverterUtils.DataSource;
-import weka.filters.Filter;
-
-import java.util.Map;
-import java.util.TreeMap;
-
 
 /**
  * Created by Marcin Gumkowski on 03.03.14.
@@ -17,19 +7,15 @@ import java.util.TreeMap;
 public class Main {
 
     public static void main(String[] args) {
-
-
-        ClusterImbalancedAlgorithm cia = new ClusterImbalancedAlgorithm();
-        cia.loadDataFile("transfusion.arff");
+       DBScanImbalancedAlgorithm dia = new DBScanImbalancedAlgorithm();
+        dia.loadDataFile("cmc.arff");
         try {
-            cia.start();
+            dia.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
-
 
 
 }

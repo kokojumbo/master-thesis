@@ -1,6 +1,5 @@
 package com.master.thesis;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import weka.clusterers.ClusterEvaluation;
 import weka.clusterers.DBSCAN;
 import weka.core.Instance;
@@ -14,10 +13,23 @@ import java.util.TreeMap;
 /**
  * Created by Marcin Gumkowski on 23.03.14.
  */
-public class ClusterImbalancedAlgorithm implements ImbalancedAlgorithm {
+public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
 
 
     private Instances data;
+
+    public DBScanImbalancedAlgorithm() {
+
+    }
+
+    /**
+     * Not implemented yet.
+     *
+     * @param options
+     */
+    public DBScanImbalancedAlgorithm(String[] options) {
+        //setParameters(options);
+    }
 
     @Override
     public void setParameters() {
@@ -53,11 +65,11 @@ public class ClusterImbalancedAlgorithm implements ImbalancedAlgorithm {
 
         System.out.println(String.format("%-20s %s", "Minority Class", minorityInstances.numInstances()));
         System.out.println(String.format("%-20s %s", "Majority Class", majorityInstances.numInstances()));
+        System.out.println(String.format("%-20s %.2f %%", "Balance", 100.0 * minorityInstances.numInstances() / data.numInstances()));
         System.out.println("=====================================");
         System.out.println();
 
         // Wyszukaj skupiska w klasie mniejszościowej
-
         // Ustaw opcje DBScan'a
         DBSCAN dbScan = new DBSCAN();
         dbScan.setDatabase_Type("weka.clusterers.forOPTICSAndDBScan.Databases.SequentialDatabase");
@@ -121,6 +133,7 @@ public class ClusterImbalancedAlgorithm implements ImbalancedAlgorithm {
             source = new DataSource(path);
             data = source.getDataSet();
             System.out.println(filename + " -> Data loaded.");
+            System.out.println();
             return data;
         } catch (Exception e) {
             e.printStackTrace();
