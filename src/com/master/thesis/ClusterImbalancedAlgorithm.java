@@ -2,7 +2,6 @@ package com.master.thesis;
 
 import weka.clusterers.AbstractClusterer;
 import weka.clusterers.ClusterEvaluation;
-import weka.clusterers.DBSCAN;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
@@ -13,9 +12,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Created by Marcin Gumkowski on 23.03.14.
+ * Created by Marcin Gumkowski on 04.05.14.
  */
-public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
+public class ClusterImbalancedAlgorithm implements ImbalancedAlgorithm {
 
     private Instances data;
 
@@ -38,7 +37,7 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
         separateDecisionClasses(data, minorityInstances, majorityInstances);
 
         // Pokaż statystyki przykladow
-        showInitialDataStatitistics(minorityInstances, majorityInstances);
+        showInitialDataStatitistics(data, minorityInstances, majorityInstances);
 
         // Usuń klasę decyzyjną -> uczenie nienadzorowane
         weka.filters.unsupervised.attribute.Remove filter = new weka.filters.unsupervised.attribute.Remove();
@@ -49,13 +48,6 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
         Instances dataNoClass = Filter.useFilter(data, filter);
 
         // Stwórz skupiska
-
-        DBSCAN dbScan = new DBSCAN();
-        dbScan.setDatabase_Type("weka.clusterers.forOPTICSAndDBScan.Databases.SequentialDatabase");
-        dbScan.setDatabase_distanceType("weka.clusterers.forOPTICSAndDBScan.DataObjects.EuclideanDataObject");
-        dbScan.setEpsilon(0.5);
-        dbScan.setMinPoints(4);
-        clusterer = dbScan;
         clusterer.buildClusterer(minorityInstancesNoClass);
 
         // Pokaż wyniki analizy skupisk
@@ -74,11 +66,13 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
         showHistogram(minorityHistogram, "Minority");
         showCombinedHistograms(majorityHistogram, minorityHistogram);
 
-        Map<Integer, Instances> clustersAssigmentsMap = new TreeMap<Integer, Instances>();
+        // Rozdziel przyklady z klasami decyzyjnymi wedlug wyznaczonych skupisk
+        Map<Integer, Instances> clustersAssignmentsMap = createClusterAssignmentsMap(data, dataNoClass, clusterer);
+        showClusterAssignmentsMap(clustersAssignmentsMap);
 
+        // TODO można zrobić SMOTE lub juz próbować klasyfikować
 
     }
-
 
     @Override
     public Instances loadDataFile(String filename) {
@@ -107,11 +101,9 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
 
     }
 
-
     @Override
     public void setClusterer(AbstractClusterer clusteringAlgorithm) {
         this.clusterer = clusteringAlgorithm;
-
     }
 
     @Override
@@ -123,7 +115,6 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
     public void setFilters() {
 
     }
-
 
     @Override
     public double getMinorityValue(Instances instances) throws Exception {
@@ -209,7 +200,7 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
                 histogram.put(cluster, histogram.containsKey(cluster) ? histogram.get(cluster) + 1 : 1);
             } catch (Exception e) {
                 // Noise
-                e.printStackTrace();
+                //e.printStackTrace();
                 histogram.put(-1, histogram.containsKey(-1) ? histogram.get(-1) + 1 : 1);
 
             }
@@ -218,28 +209,79 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
         return histogram;
     }
 
-    private Map<Integer, Integer> createHistogram(double[] assigments) {
+    private Map<Integer, Integer> createHistogram(double[] assignments) {
         Map<Integer, Integer> histogram = new TreeMap<Integer, Integer>();
-        for (double val : assigments) {
+        for (double val : assignments) {
             histogram.put((int) val, histogram.containsKey((int) val) ? histogram.get((int) val) + 1 : 1);
         }
         return histogram;
     }
 
-    private void showInitialDataStatitistics(Instances minorityInstances, Instances majorityInstances) {
+    private Map<Integer, Instances> createClusterAssignmentsMap(Instances data, Instances dataNoClass, AbstractClusterer clusterer) {
+        Map<Integer, Instances> clustersAssignmentsMap = new TreeMap<Integer, Instances>();
+        for (int i = 0; i < data.numInstances(); i++) {
+            Instance currInst = dataNoClass.instance(i);
+            try {
+                int cluster = clusterer.clusterInstance(currInst);
+
+                if (clustersAssignmentsMap.containsKey(cluster)) {
+                    clustersAssignmentsMap.get(cluster).add(data.instance(i));
+
+                } else {
+                    Instances dataClustered = new Instances(data);
+                    dataClustered.delete();
+                    dataClustered.add(data.instance(i));
+                    clustersAssignmentsMap.put(cluster, dataClustered);
+                }
+
+            } catch (Exception e) {
+                // Noise
+                //e.printStackTrace();
+                if (clustersAssignmentsMap.containsKey(-1)) {
+                    clustersAssignmentsMap.get(-1).add(data.instance(i));
+
+                } else {
+                    Instances dataClustered = new Instances(data);
+                    dataClustered.delete();
+                    dataClustered.add(data.instance(i));
+                    clustersAssignmentsMap.put(-1, dataClustered);
+                }
+
+            }
+
+        }
+        return clustersAssignmentsMap;
+    }
+
+    private void showClusterAssignmentsMap(Map<Integer, Instances> clustersAssignmentsMap) throws Exception {
+        System.out.println();
+        for (Map.Entry<Integer, Instances> entry : clustersAssignmentsMap.entrySet()) {
+            System.out.println("Cluster -> " + entry.getKey());
+
+            // Rozdziel przykłady na dwie klasy: mniejszościową i większościową
+            Instances minorityInstancesInCluster = new Instances(entry.getValue());
+            Instances majorityInstancesInCluster = new Instances(entry.getValue());
+            separateDecisionClasses(entry.getValue(), minorityInstancesInCluster, majorityInstancesInCluster);
+
+            // Pokaż statystyki przykladow
+            showInitialDataStatitistics(entry.getValue(), minorityInstancesInCluster, majorityInstancesInCluster);
+
+        }
+        System.out.println();
+    }
+
+
+    private void showInitialDataStatitistics(Instances baseData, Instances minorityInstances, Instances majorityInstances) {
         System.out.println("=====================================");
         System.out.println(String.format("%-20s %s", "    ", "Count"));
         System.out.println("-------------------------------------");
-        System.out.println(String.format("%-20s %s", "Instances", data.numInstances()));
-        System.out.println(String.format("%-20s %s", "Atrributes", data.numAttributes()));
-        System.out.println(String.format("%-20s %s", "Distinct Values", data.numDistinctValues(data.classAttribute())));
+        System.out.println(String.format("%-20s %s", "Instances", baseData.numInstances()));
+        System.out.println(String.format("%-20s %s", "Atrributes", baseData.numAttributes()));
+        System.out.println(String.format("%-20s %s", "Distinct Values", baseData.numDistinctValues(baseData.classAttribute())));
         System.out.println(String.format("%-20s %s", "Minority Class", minorityInstances.numInstances()));
         System.out.println(String.format("%-20s %s", "Majority Class", majorityInstances.numInstances()));
-        System.out.println(String.format("%-20s %.2f %%", "Balance", 100.0 * minorityInstances.numInstances() / data.numInstances()));
+        System.out.println(String.format("%-20s %.2f %%", "Balance", 100.0 * minorityInstances.numInstances() / baseData.numInstances()));
         System.out.println("=====================================");
         System.out.println();
     }
 }
-
-
-

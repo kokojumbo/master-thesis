@@ -1,5 +1,6 @@
 package com.master.thesis;
 
+import weka.clusterers.AbstractClusterer;
 import weka.core.Instances;
 
 /**
@@ -7,16 +8,17 @@ import weka.core.Instances;
  */
 public interface ImbalancedAlgorithm {
 
-
-    public void setParameters();
-
-    public void getParameters();
-
     public void start() throws Exception;
 
     public Instances loadDataFile(String filename);
 
     public double getMinorityValue(Instances instances) throws Exception;
+
+    public void setClusterer(AbstractClusterer clusteringAlgorithm);
+
+    public void setClustererOptions(String[] options);
+
+    public void setFilters();
 
 
 }
