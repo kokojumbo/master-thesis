@@ -10,15 +10,12 @@ public interface ImbalancedAlgorithm {
 
     public void start() throws Exception;
 
-    public Instances loadDataFile(String filename);
-
-    public double getMinorityValue(Instances instances) throws Exception;
-
     public void setClusterer(AbstractClusterer clusteringAlgorithm);
 
-    public void setClustererOptions(String[] options);
+    public Instances loadDataFile(String filename);
 
-    public void setFilters();
+    public void smoteEnable(boolean enable);
 
+    public void setClassiffier(String classiffier, String[] classiffierOptions);
 
 }

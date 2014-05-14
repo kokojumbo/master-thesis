@@ -114,18 +114,18 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
 
     }
 
+
     @Override
-    public void setClustererOptions(String[] options) {
+    public void smoteEnable(boolean enable) {
 
     }
 
     @Override
-    public void setFilters() {
+    public void setClassiffier(String classiffier, String[] classiffierOptions) {
 
     }
 
 
-    @Override
     public double getMinorityValue(Instances instances) throws Exception {
         int numInstances = instances.numInstances();
         if (numInstances < 1) {
