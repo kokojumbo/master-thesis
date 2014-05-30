@@ -10,13 +10,16 @@ public class Main {
 
     public static void main(String[] args) {
         ClusterImbalancedAlgorithm cia = new ClusterImbalancedAlgorithm();
-        cia.loadDataFile("abalone.arff");
-        SimpleKMeans skm = new SimpleKMeans();
+        String filename = "acl.arff";
+        cia.loadDataFile(filename);
+
         try {
+            SimpleKMeans skm = new SimpleKMeans();
             skm.setOptions(weka.core.Utils.splitOptions("-N 3 -A \"weka.core.EuclideanDistance -R first-last\" -I 500 -S 10"));
             cia.setClusterer(skm);
+            cia.setAutoParameterization(true);
             cia.smoteEnable(true);
-            cia.setClassiffier("weka.classifiers.trees.J48", null);
+            cia.setClassifier("weka.classifiers.trees.J48", weka.core.Utils.splitOptions("-U -M 2"));
             cia.start();
         } catch (Exception e) {
             e.printStackTrace();

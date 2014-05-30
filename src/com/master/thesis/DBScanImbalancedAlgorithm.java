@@ -121,7 +121,12 @@ public class DBScanImbalancedAlgorithm implements ImbalancedAlgorithm {
     }
 
     @Override
-    public void setClassiffier(String classiffier, String[] classiffierOptions) {
+    public void setClassifier(String classifier, String[] classifierOptions) {
+
+    }
+
+    @Override
+    public void setAutoParameterization(boolean enable) {
 
     }
 

@@ -1,6 +1,8 @@
 package com.master.thesis;
 
 import weka.clusterers.AbstractClusterer;
+import weka.clusterers.ClusterEvaluation;
+import weka.clusterers.SimpleKMeans;
 import weka.core.Instance;
 import weka.core.Instances;
 
@@ -177,4 +179,70 @@ public class ImbalancedUtils {
         System.out.println("=====================================");
         System.out.println();
     }
+
+    public static String getParametersForKMeans(Instances instances, String name) {
+
+        SimpleKMeans kmeans = new SimpleKMeans();
+        String options = "-init 0 -max-candidates 100 -periodic-pruning 10000 -min-density 2.0 -t1 -1.25 -t2 -1.0 -V -N 2 -A \"weka.core.EuclideanDistance -R first-last\" -I 500 -num-slots 1 -S 10";
+        try {
+            kmeans.setOptions(weka.core.Utils.splitOptions(options));
+            int numK = 20;
+            double[] results = new double[numK];
+
+            for (int i = 1; i <= numK; i++) {
+                kmeans.setNumClusters(i);
+                kmeans.buildClusterer(instances);
+
+
+                double[][] centroids = new double[i][kmeans.getClusterCentroids().get(0).numAttributes()];
+
+
+                double[][] stdDevs = new double[i][kmeans.getClusterStandardDevs().get(0).numAttributes()];
+
+                for (int j = 0; j < i; j++) {
+                    for (int k = 0; k < kmeans.getClusterCentroids().get(0).numAttributes(); k++) {
+                        if (!Double.isNaN(kmeans.getClusterCentroids().get(j).value(k)) && !Double.isNaN(kmeans.getClusterStandardDevs().get(j).value(k))) {
+                            centroids[j][k] = kmeans.getClusterCentroids().get(j).value(k);
+                            stdDevs[j][k] = kmeans.getClusterStandardDevs().get(j).value(k);
+                        } else {
+                            centroids[j][k] = 0.0;
+                            stdDevs[j][k] = 0.0;
+                        }
+
+                    }
+                }
+
+
+                double sum_clust = 0;
+                for (int j = 0; j < centroids.length; j++) {
+                    double sum_att = 0;
+                    for (int k = 0; k < centroids[0].length; k++) {
+                        double d = stdDevs[j][k];
+                        sum_att += d;
+                    }
+                    sum_clust += sum_att;
+                }
+                results[i - 1] = sum_clust / centroids.length;
+
+                // Pokaż wyniki analizy skupisk
+                ClusterEvaluation evaluation = new ClusterEvaluation();
+                evaluation.setClusterer(kmeans);
+                evaluation.evaluateClusterer(instances);
+
+                //System.out.println(evaluation.clusterResultsToString());
+            }
+            System.out.println(name);
+            for (int i = 0; i < numK; i++) {
+                System.out.println(String.format("%.3f", results[i]));
+            }
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return "";
+
+    }
+
 }

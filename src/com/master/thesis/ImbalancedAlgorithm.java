@@ -16,6 +16,7 @@ public interface ImbalancedAlgorithm {
 
     public void smoteEnable(boolean enable);
 
-    public void setClassiffier(String classiffier, String[] classiffierOptions);
+    public void setClassifier(String classifier, String[] classifierOptions);
 
+    public void setAutoParameterization(boolean enable);
 }
