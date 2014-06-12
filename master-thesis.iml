@@ -10,6 +10,7 @@
     <orderEntry type="library" name="nz.ac.waikato.cms.weka:weka-dev:3.7.11" level="project" />
     <orderEntry type="library" name="nz.ac.waikato.cms.weka:optics_dbScan:1.0.4" level="project" />
     <orderEntry type="library" name="nz.ac.waikato.cms.weka:SMOTE:1.0.3" level="project" />
+    <orderEntry type="library" name="nz.ac.waikato.cms.weka:XMeans:1.0.4" level="project" />
   </component>
 </module>
 
