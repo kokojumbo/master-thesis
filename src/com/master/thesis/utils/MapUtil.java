@@ -1,4 +1,4 @@
-package com.master.thesis;
+package com.master.thesis.utils;
 
 import java.util.*;
 

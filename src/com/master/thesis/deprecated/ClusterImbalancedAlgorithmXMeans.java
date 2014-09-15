@@ -1,5 +1,6 @@
-package com.master.thesis;
+package com.master.thesis.deprecated;
 
+import com.master.thesis.core.ImbalancedAlgorithm;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -17,7 +18,7 @@ import weka.filters.unsupervised.attribute.Normalize;
 import java.util.Map;
 import java.util.Random;
 
-import static com.master.thesis.ImbalancedUtils.*;
+import static com.master.thesis.utils.ImbalancedUtils.*;
 
 /**
  * Created by Marcin Gumkowski on 04.05.14.
@@ -58,7 +59,7 @@ public class ClusterImbalancedAlgorithmXMeans implements ImbalancedAlgorithm {
 
 
         XMeans xm = new XMeans();
-        xm.setOptions(weka.core.Utils.splitOptions("weka.clusterers.XMeans -I 1 -M 1000 -J 1000 -L 2 -H 6 -B 1.0 -C 0.5 -D \"weka.core.EuclideanDistance -R first-last\" -S 10"));
+        xm.setOptions(weka.core.Utils.splitOptions("weka.clusterers.XMeans -I 1 -M 1000 -J 1000 -L 2 -H 14 -B 1.0 -C 0.5 -D \"weka.core.EuclideanDistance -R first-last\" -S 10"));
         setClusterer(xm);
         // Usuń klasę decyzyjną -> uczenie nienadzorowane
         //TODO usun atrybuty nominalne lub je zamien na numeryczne
@@ -77,10 +78,10 @@ public class ClusterImbalancedAlgorithmXMeans implements ImbalancedAlgorithm {
 
         // Stwórz skupiska
         String options;
-        if (autoParametrizationEnable) {
-            options = getParametersForKMeans(minorityInstancesNoClass, filename);
-            clusterer.setOptions(weka.core.Utils.splitOptions(options));
-        }
+        //if (autoParametrizationEnable) {
+            //options = getParametersForKMeans(minorityInstancesNoClass, filename);
+           // clusterer.setOptions(weka.core.Utils.splitOptions(options));
+       // }
 
         clusterer.buildClusterer(minorityInstancesNoClass);
 
@@ -113,6 +114,7 @@ public class ClusterImbalancedAlgorithmXMeans implements ImbalancedAlgorithm {
             if (smoteEnable) {
                 System.out.println("SMOTE filtering");
                 SMOTE smote = new SMOTE();
+                System.out.println(getSMOTEPercentage(entry.getValue()));
                 smote.setOptions(weka.core.Utils.splitOptions("-C 0 -K 5 -P " + getSMOTEPercentage(entry.getValue()) + " -S 1"));
                 smote.setInputFormat(entry.getValue());
                 fc.setFilter(smote);

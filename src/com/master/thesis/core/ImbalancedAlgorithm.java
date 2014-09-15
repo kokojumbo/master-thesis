@@ -1,4 +1,4 @@
-package com.master.thesis;
+package com.master.thesis.core;
 
 import weka.clusterers.AbstractClusterer;
 import weka.core.Instances;

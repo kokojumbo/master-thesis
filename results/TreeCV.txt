@@ -1,0 +1,639 @@
+======================================================================
+======================================================================
+======================================================================
+======================      acl.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         128               91.4286 %
+Incorrectly Classified Instances        12                8.5714 %
+Kappa statistic                          0.79  
+Mean absolute error                      0.1301
+Root mean squared error                  0.2778
+Relative absolute error                 31.7714 %
+Root relative squared error             61.4816 %
+Coverage of cases (0.95 level)          96.4286 %
+Mean rel. region size (0.95 level)      75      %
+Total Number of Instances              140     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,850    0,060    0,850      0,850    0,850      0,790    0,890     0,793     1
+                 0,940    0,150    0,940      0,940    0,940      0,790    0,890     0,931     2
+Weighted Avg.    0,914    0,124    0,914      0,914    0,914      0,790    0,890     0,892     
+
+=== Confusion Matrix ===
+
+  a  b   <-- classified as
+ 34  6 |  a = 1
+  6 94 |  b = 2
+
+0.85
+0.94
+0.914
+0.94
+0.85
+0.876
+0.85
+0.94
+0.895
+0.85
+0.94
+0.914
+91.429 %
+======================================================================
+======================================================================
+======================================================================
+======================      new-thyroid.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         202               93.9535 %
+Incorrectly Classified Instances        13                6.0465 %
+Kappa statistic                          0.7807
+Mean absolute error                      0.0677
+Root mean squared error                  0.2413
+Relative absolute error                 24.6081 %
+Root relative squared error             65.344  %
+Coverage of cases (0.95 level)          94.8837 %
+Mean rel. region size (0.95 level)      52.093  %
+Total Number of Instances              215     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,829    0,039    0,806      0,829    0,817      0,781    0,912     0,706     2
+                 0,961    0,171    0,966      0,961    0,964      0,781    0,912     0,970     other
+Weighted Avg.    0,940    0,150    0,940      0,940    0,940      0,781    0,912     0,927     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  29   6 |   a = 2
+   7 173 |   b = other
+
+0.829
+0.961
+0.94
+0.961
+0.829
+0.85
+0.829
+0.961
+0.894
+0.817
+0.964
+0.94
+93.953 %
+======================================================================
+======================================================================
+======================================================================
+======================      vehicle.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         743               87.8251 %
+Incorrectly Classified Instances       103               12.1749 %
+Kappa statistic                          0.6645
+Mean absolute error                      0.1496
+Root mean squared error                  0.2957
+Relative absolute error                 41.5347 %
+Root relative squared error             69.7248 %
+Coverage of cases (0.95 level)          99.0544 %
+Mean rel. region size (0.95 level)      68.3215 %
+Total Number of Instances              846     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,754    0,083    0,735      0,754    0,744      0,665    0,927     0,787     van
+                 0,917    0,246    0,924      0,917    0,920      0,665    0,927     0,971     rest
+Weighted Avg.    0,878    0,208    0,879      0,878    0,879      0,665    0,927     0,928     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 150  49 |   a = van
+  54 593 |   b = rest
+
+0.754
+0.917
+0.878
+0.917
+0.754
+0.792
+0.754
+0.917
+0.834
+0.744
+0.92
+0.879
+87.825 %
+======================================================================
+======================================================================
+======================================================================
+======================      ecoli.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         315               93.75   %
+Incorrectly Classified Instances        21                6.25   %
+Kappa statistic                          0.5869
+Mean absolute error                      0.0967
+Root mean squared error                  0.2309
+Relative absolute error                 51.2605 %
+Root relative squared error             75.5735 %
+Coverage of cases (0.95 level)          99.1071 %
+Mean rel. region size (0.95 level)      62.3512 %
+Total Number of Instances              336     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,486    0,010    0,850      0,486    0,618      0,614    0,890     0,557     imU
+                 0,990    0,514    0,943      0,990    0,966      0,614    0,890     0,977     other
+Weighted Avg.    0,938    0,462    0,933      0,938    0,930      0,614    0,890     0,933     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  17  18 |   a = imU
+   3 298 |   b = other
+
+0.486
+0.99
+0.938
+0.99
+0.486
+0.538
+0.486
+0.99
+0.71
+0.618
+0.966
+0.93
+93.75 %
+======================================================================
+======================================================================
+======================================================================
+======================      ionosphere.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         317               90.3134 %
+Incorrectly Classified Instances        34                9.6866 %
+Kappa statistic                          0.7888
+Mean absolute error                      0.1029
+Root mean squared error                  0.2976
+Relative absolute error                 22.3398 %
+Root relative squared error             62.0241 %
+Coverage of cases (0.95 level)          92.3077 %
+Mean rel. region size (0.95 level)      53.5613 %
+Total Number of Instances              351     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,857    0,071    0,871      0,857    0,864      0,789    0,902     0,841     b
+                 0,929    0,143    0,921      0,929    0,925      0,789    0,902     0,907     g
+Weighted Avg.    0,903    0,117    0,903      0,903    0,903      0,789    0,902     0,883     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 108  18 |   a = b
+  16 209 |   b = g
+
+0.857
+0.929
+0.903
+0.929
+0.857
+0.883
+0.857
+0.929
+0.893
+0.864
+0.925
+0.903
+90.313 %
+======================================================================
+======================================================================
+======================================================================
+======================      haberman.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         223               72.8758 %
+Incorrectly Classified Instances        83               27.1242 %
+Kappa statistic                          0.1763
+Mean absolute error                      0.3679
+Root mean squared error                  0.4331
+Relative absolute error                 94.3153 %
+Root relative squared error             98.1741 %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)     100      %
+Total Number of Instances              306     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,247    0,098    0,476      0,247    0,325      0,191    0,589     0,337     2
+                 0,902    0,753    0,769      0,902    0,830      0,191    0,589     0,770     1
+Weighted Avg.    0,729    0,580    0,691      0,729    0,697      0,191    0,589     0,656     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  20  61 |   a = 2
+  22 203 |   b = 1
+
+0.247
+0.902
+0.729
+0.902
+0.247
+0.42
+0.247
+0.902
+0.553
+0.325
+0.83
+0.697
+72.876 %
+======================================================================
+======================================================================
+======================================================================
+======================      abalone.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances        3857               92.339  %
+Incorrectly Classified Instances       320                7.661  %
+Kappa statistic                          0.2438
+Mean absolute error                      0.1222
+Root mean squared error                  0.2533
+Relative absolute error                 82.7467 %
+Root relative squared error             93.2619 %
+Coverage of cases (0.95 level)          98.8508 %
+Mean rel. region size (0.95 level)      75.7601 %
+Total Number of Instances             4177     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,179    0,012    0,571      0,179    0,273      0,290    0,764     0,311     600
+                 0,988    0,821    0,932      0,988    0,960      0,290    0,764     0,964     500
+Weighted Avg.    0,923    0,756    0,904      0,923    0,904      0,290    0,764     0,912     
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+   60  275 |    a = 600
+   45 3797 |    b = 500
+
+0.179
+0.988
+0.923
+0.988
+0.179
+0.244
+0.179
+0.988
+0.475
+0.273
+0.96
+0.904
+92.339 %
+======================================================================
+======================================================================
+======================================================================
+======================      transfusion.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         563               75.2674 %
+Incorrectly Classified Instances       185               24.7326 %
+Kappa statistic                          0.0212
+Mean absolute error                      0.3605
+Root mean squared error                  0.4256
+Relative absolute error                 99.2762 %
+Root relative squared error             99.9509 %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)     100      %
+Total Number of Instances              748     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,039    0,025    0,333      0,039    0,070      0,038    0,527     0,254     1
+                 0,975    0,961    0,765      0,975    0,857      0,038    0,527     0,774     0
+Weighted Avg.    0,753    0,738    0,662      0,753    0,670      0,038    0,527     0,650     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+   7 171 |   a = 1
+  14 556 |   b = 0
+
+0.039
+0.975
+0.753
+0.975
+0.039
+0.262
+0.039
+0.975
+0.444
+0.07
+0.857
+0.67
+75.267 %
+======================================================================
+======================================================================
+======================================================================
+======================      yeast-ME2.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances        1431               96.4286 %
+Incorrectly Classified Instances        53                3.5714 %
+Kappa statistic                         -0.0026
+Mean absolute error                      0.0591
+Root mean squared error                  0.1766
+Relative absolute error                 88.152  %
+Root relative squared error             96.9454 %
+Coverage of cases (0.95 level)          98.1132 %
+Mean rel. region size (0.95 level)      54.2116 %
+Total Number of Instances             1484     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,000    0,001    0,000      0,000    0,000      -0,007   0,714     0,127     ME2
+                 0,999    1,000    0,966      0,999    0,982      -0,007   0,714     0,979     rest
+Weighted Avg.    0,964    0,966    0,932      0,964    0,948      -0,007   0,714     0,949     
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+    0   51 |    a = ME2
+    2 1431 |    b = rest
+
+0.0
+0.999
+0.964
+0.999
+0.0
+0.034
+0.0
+0.999
+0.182
+0.0
+0.982
+0.948
+96.429 %
+======================================================================
+======================================================================
+======================================================================
+======================      paw02a-600-5-0-BI-ver-1-bez-zmian.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         521               86.8333 %
+Incorrectly Classified Instances        79               13.1667 %
+Kappa statistic                          0.6354
+Mean absolute error                      0.1471
+Root mean squared error                  0.2754
+Relative absolute error                 52.8088 %
+Root relative squared error             73.8901 %
+Coverage of cases (0.95 level)          99.6667 %
+Mean rel. region size (0.95 level)      64.5833 %
+Total Number of Instances              600     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,980    0,154    0,560      0,980    0,713      0,677    0,897     0,495     0
+                 0,846    0,020    0,995      0,846    0,915      0,677    0,897     0,977     1
+Weighted Avg.    0,868    0,042    0,923      0,868    0,881      0,677    0,897     0,897     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  98   2 |   a = 0
+  77 423 |   b = 1
+
+0.98
+0.846
+0.868
+0.846
+0.98
+0.958
+0.98
+0.846
+0.912
+0.713
+0.915
+0.881
+86.833 %
+======================================================================
+======================================================================
+======================================================================
+======================      paw02a-600-5-0-BI-ver-2-oddalone-skupiska.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         500               83.3333 %
+Incorrectly Classified Instances       100               16.6667 %
+Kappa statistic                          0     
+Mean absolute error                      0.2778
+Root mean squared error                  0.3727
+Relative absolute error                 99.7057 %
+Root relative squared error             99.9995 %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)     100      %
+Total Number of Instances              600     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,000    0,000    0,000      0,000    0,000      0,000    0,500     0,167     0
+                 1,000    1,000    0,833      1,000    0,909      0,000    0,500     0,833     1
+Weighted Avg.    0,833    0,833    0,694      0,833    0,758      0,000    0,500     0,722     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+   0 100 |   a = 0
+   0 500 |   b = 1
+
+0.0
+1.0
+0.833
+1.0
+0.0
+0.167
+0.0
+1.0
+0.373
+0.0
+0.909
+0.758
+83.333 %
+======================================================================
+======================================================================
+======================================================================
+======================      paw02a-600-5-0-BI-ver-3-zmieszane.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         500               83.3333 %
+Incorrectly Classified Instances       100               16.6667 %
+Kappa statistic                          0     
+Mean absolute error                      0.2778
+Root mean squared error                  0.3727
+Relative absolute error                 99.7057 %
+Root relative squared error             99.9995 %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)     100      %
+Total Number of Instances              600     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,000    0,000    0,000      0,000    0,000      0,000    0,500     0,167     0
+                 1,000    1,000    0,833      1,000    0,909      0,000    0,500     0,833     1
+Weighted Avg.    0,833    0,833    0,694      0,833    0,758      0,000    0,500     0,722     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+   0 100 |   a = 0
+   0 500 |   b = 1
+
+0.0
+1.0
+0.833
+1.0
+0.0
+0.167
+0.0
+1.0
+0.373
+0.0
+0.909
+0.758
+83.333 %
+======================================================================
+======================================================================
+======================================================================
+======================      paw02a-600-5-0-BI-ver-4-outliery.arff       =======================
+======================================================================
+======================================================================
+======================================================================
+
+Results
+======
+
+Correctly Classified Instances         500               83.3333 %
+Incorrectly Classified Instances       100               16.6667 %
+Kappa statistic                          0     
+Mean absolute error                      0.2778
+Root mean squared error                  0.3727
+Relative absolute error                 99.7057 %
+Root relative squared error             99.9995 %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)     100      %
+Total Number of Instances              600     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,000    0,000    0,000      0,000    0,000      0,000    0,500     0,167     0
+                 1,000    1,000    0,833      1,000    0,909      0,000    0,500     0,833     1
+Weighted Avg.    0,833    0,833    0,694      0,833    0,758      0,000    0,500     0,722     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+   0 100 |   a = 0
+   0 500 |   b = 1
+
+0.0
+1.0
+0.833
+1.0
+0.0
+0.167
+0.0
+1.0
+0.373
+0.0
+0.909
+0.758
+83.333 %
+
+Aggregated results
+
+
+
+
+
+
+
+
+
+
+
+
+

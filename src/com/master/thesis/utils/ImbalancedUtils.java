@@ -1,4 +1,4 @@
-package com.master.thesis;
+package com.master.thesis.utils;
 
 import weka.clusterers.AbstractClusterer;
 import weka.clusterers.ClusterEvaluation;
@@ -242,6 +242,24 @@ public class ImbalancedUtils {
 
 
         return "";
+
+    }
+
+    public static double getSMOTEPercentage(Instances instances) {
+        Instances minorityInstances = new Instances(instances);
+        Instances majorityInstances = new Instances(instances);
+        Instances newInstances = new Instances(instances);
+        try {
+            separateDecisionClasses(newInstances, minorityInstances, majorityInstances);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        double result = (((1.0 * majorityInstances.numInstances() / minorityInstances.numInstances()) - 1) * 100.0);
+        if (result >=0  ){
+            return result;
+        }
+        return 0;
+
 
     }
 

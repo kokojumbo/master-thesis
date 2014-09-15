@@ -1,4 +1,4 @@
-package com.master.thesis;
+package com.master.thesis.deprecated;
 
 import weka.clusterers.SimpleKMeans;
 
@@ -28,7 +28,7 @@ public class KMeansParameters {
             }
 
             for (int i = 0; i < listOfFiles.length; i++) {
-                ClusterImbalancedAlgorithmParamTest test = new ClusterImbalancedAlgorithmParamTest();
+                DBScanImbalancedAlgorithm.ClusterImbalancedAlgorithmParamTest test = new DBScanImbalancedAlgorithm.ClusterImbalancedAlgorithmParamTest();
                 test.loadDataFile(listOfFiles[i].getName());
                 SimpleKMeans skm = new SimpleKMeans();
                 skm.setOptions(weka.core.Utils.splitOptions("-N 3 -A \"weka.core.EuclideanDistance -R first-last\" -I 500 -S 10"));

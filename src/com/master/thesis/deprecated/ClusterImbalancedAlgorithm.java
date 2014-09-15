@@ -1,5 +1,6 @@
-package com.master.thesis;
+package com.master.thesis.deprecated;
 
+import com.master.thesis.core.ImbalancedAlgorithm;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -15,7 +16,7 @@ import weka.filters.unsupervised.attribute.Normalize;
 import java.util.Map;
 import java.util.Random;
 
-import static com.master.thesis.ImbalancedUtils.*;
+import static com.master.thesis.utils.ImbalancedUtils.*;
 
 /**
  * Created by Marcin Gumkowski on 04.05.14.
