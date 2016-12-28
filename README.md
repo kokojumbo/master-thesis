@@ -1,4 +1,4 @@
 master-thesis
 =============
 
-New way to solve a problem of Imbalanced Data.
+This project is a new way to solve a problem of Imbalanced Data.
